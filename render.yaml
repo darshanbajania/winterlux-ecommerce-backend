@@ -1,0 +1,21 @@
+databases:
+  - name: winterlux-db
+    databaseName: winterlux
+    user: winterlux
+    plan: free
+
+services:
+  - type: web
+    name: winterlux-backend
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ecommerce_backend.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: winterlux-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
