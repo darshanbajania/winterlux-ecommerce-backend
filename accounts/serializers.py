@@ -1,4 +1,8 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -21,3 +25,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['is_superuser'] = self.user.is_superuser
         
         return data
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'is_staff', 'date_joined']

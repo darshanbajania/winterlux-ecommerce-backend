@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'accounts',
     'products',
+    'orders',
+    'support',
     'cloudinary_storage',
     'cloudinary',
     'corsheaders',
